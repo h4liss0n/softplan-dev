@@ -1,0 +1,87 @@
+import * as base64 from "base-64";
+import * as bcrypt from 'bcryptjs';
+import { NextFunction, Request, Response } from 'express';
+import * as jwt from "jwt-simple";
+import { getRepository } from "typeorm";
+import { Pessoa } from "../../entity/User";
+import { ITokenResponse } from "./authenticator.interface";
+
+export const APP_AUTH_SECRET = 'dsahufhuasduhfuhadsuhf'
+
+
+class AuthenticatorController {
+
+    static autorizarion = async (request: Request, response: Response, next: NextFunction) => {
+
+        let token = request.headers.authorization || "";
+        // pegar apenas o token
+        if (token.split(' ').length > 0) token = token.split(' ')[1]
+
+        const secret = 'dhfasuhfhsdaufhsduf@123';
+        let decoded = undefined;
+        try {
+            decoded = jwt.decode(token, secret);
+
+            response.status(200).send('Autorization');
+        } catch (error) {
+            response.status(401).send();
+        }
+
+    }
+    static authentication = async (request: Request, response: Response, next: NextFunction) => {
+
+
+
+        let user = '';
+        let password = '';
+        let headerAuth = request.headers.authorization || '';
+        headerAuth = base64.decode(headerAuth.split(' ')[1])
+
+        user = headerAuth.split(':')[0];
+        password = headerAuth.split(':')[1];
+
+        console.log(user, password)
+
+        if (!user) {
+            response.status(400).send({ erro: 'email field is required!' })
+        }
+
+        if (!password) {
+            response.status(400).send({ erro: 'password field is required!' })
+        }
+        
+        const userRepository = getRepository(Pessoa);
+        const pessoa = await userRepository
+            .createQueryBuilder("pessoa")
+            .where("pessoa.email_pes = :email", { email: user })
+            .getOne();
+
+        if (!pessoa) {
+            response.status(401).send({ erro: 'email not is valid' });
+            } else {
+
+            if (!bcrypt.compareSync(password, pessoa.senha_pes)) {
+                response.status(401).send({ erro: 'password not is valid!' });
+            }
+
+            const auth: ITokenResponse = {
+                id: pessoa.id_pes,
+                email: pessoa.email_pes,
+                name: pessoa.nome_pes
+            }
+
+            let payload = { auth };
+            let secret = APP_AUTH_SECRET;
+            var token = jwt.encode(payload, secret);
+
+            const data = { token, auth }
+
+
+            response.status(200).send(data);
+        }
+
+
+    }
+}
+
+export default AuthenticatorController

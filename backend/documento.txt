@@ -1,0 +1,9 @@
+banco de dados
+    versão: postgresql-13.1-1-windows-x64
+    porta: 5433
+    locale: Protuguese, Brazil
+    pw:lm
+    C:\Program Files\PostgreSQL\13\data
+        pg_hba_config.cofig 
+            # IPv4 local connections:
+               host    all             all             192.168.1.16/32            scram-sha-256 

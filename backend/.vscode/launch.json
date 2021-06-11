@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Example",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "node",
+        "runtimeArgs": [
+          "-r",
+          "ts-node/register"
+        ],
+        "args": [
+          "src/index.ts",
+          "--example",
+          "hello"
+        ],
+        "cwd": "${workspaceRoot}",
+        "internalConsoleOptions": "openOnSessionStart",
+        "skipFiles": [
+          "<node_internals>/**",
+          "node_modules/**"
+        ]
+      },
+      {
+        "name": "Docker Node.js Launch",
+        "type": "docker",
+        "request": "launch",
+        "preLaunchTask": "docker-run: debug",
+        "platform": "node"
+      }
+    ]
+  }

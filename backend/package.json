@@ -1,0 +1,47 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "sofplan",
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/multer": "^1.4.3",
+    "@types/node": "^8.0.29",
+    "@types/puppeteer": "^5.4.3",
+    "nodemon": "^2.0.4",
+    "ts-node": "3.3.0",
+    "copyfiles": "^2.4.1",
+    "typescript": "3.3.3333"
+  },
+  "dependencies": {
+    "base-64": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.15.4",
+    "handlebars": "^4.7.7",
+    "jwt-simple": "^0.5.6",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "pg": "^8.6.0",
+    "puppeteer": "^9.1.1",
+    "puppeteer-core": "^9.1.1",
+    "reflect-metadata": "^0.1.10",
+    "typeorm": "0.2.32"
+  },
+  "scripts": {
+    "exec": "node index.js",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon start",
+    "copytemp": "copyfiles temp temp/*.txt build",
+    "copytemplate": "copyfiles template template/*.html build",
+    "build": "npm run copytemp && npm run copytemplate && tsc -p ."
+  },
+  "nodemonConfig": {
+    "ext": "ts",
+    "delay": "2500",
+    "watch": [
+      "src"
+    ]
+  }
+}

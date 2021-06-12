@@ -11,10 +11,10 @@ const AuthMiddleware = (req: Request, resp: Response, next) => {
 
         if (token.split(' ').length > 0) token = token.split(' ')[1]
 
-        const secret = APP_AUTH_SECRET;
+        console.log(token)
         let decoded = undefined;
         try {
-                decoded = jwt.decode(token, secret);
+                decoded = jwt.decode(token, APP_AUTH_SECRET);
         } catch (error) {
                 resp.status(401).send();
         }

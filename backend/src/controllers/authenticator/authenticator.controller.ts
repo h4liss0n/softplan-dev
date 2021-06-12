@@ -1,4 +1,5 @@
 import * as base64 from "base-64";
+import * as bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import * as jwt from "jwt-simple";
 import { getRepository } from "typeorm";
@@ -48,7 +49,7 @@ class AuthenticatorController {
         if (!password) {
             response.status(400).send({ erro: 'password field is required!' })
         }
-        
+
         const peopleRepository = getRepository(People);
         const people = await peopleRepository
             .createQueryBuilder("p")
@@ -57,30 +58,28 @@ class AuthenticatorController {
 
         if (!people) {
             response.status(401).send({ erro: 'email not is valid' });
-            } else {
-
-            // if (!bcrypt.compareSync(password, people.senha_peo)) {
-            //     response.status(401).send({ erro: 'password not is valid!' });
-            // }
-
-            const auth: ITokenResponse = {
-                id: people.id_peo,
-                email: people.email_peo,
-                name: people.sobre_nome_peo
-            }
-
-            let payload = { auth };
-            let secret = APP_AUTH_SECRET;
-            var token = jwt.encode(payload, secret);
-
-            const data = { token, auth }
-
-
-            response.status(200).send(data);
         }
 
+        if (!bcrypt.compareSync(password, people.senha_peo)) {
+            response.status(401).send({ erro: 'password not is valid!' });
+        }
 
+        const auth: ITokenResponse = {
+            id: people.id_peo,
+            email: people.email_peo,
+            name: people.sobre_nome_peo
+        }
+
+        let payload = { auth };
+        let secret = APP_AUTH_SECRET;
+        var token = jwt.encode(payload, secret);
+
+
+        response.status(200).send({ token: token });
     }
+
+
+
 }
 
 export default AuthenticatorController

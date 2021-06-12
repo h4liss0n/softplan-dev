@@ -6,10 +6,9 @@ export class peopleUser11623464143519 implements MigrationInterface {
         await queryRunner.query(`
         INSERT INTO public.people(
             id_peo, nome_peo, sobre_nome_peo, email_peo, senha_peo)
-            VALUES (1, 'halisson', 'skalee','halisson@gmail.com', '123');
+            VALUES (1, 'halisson', 'skalee','halisson@gmail.com', '$2a$10$z.YfaqC4ynuqHxYkbZv5hOYERvhVwMtuQFlnLcVHFXKFGGHoddNdO');
         
         `)
-
 
     }
 

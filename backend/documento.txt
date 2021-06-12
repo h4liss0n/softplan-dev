@@ -1,4 +1,5 @@
 npm run typeorm migration:run
+typeorm migration:create --name user
 
 
 

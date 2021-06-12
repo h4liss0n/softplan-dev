@@ -1,9 +1,8 @@
 import * as base64 from "base-64";
-import * as bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import * as jwt from "jwt-simple";
 import { getRepository } from "typeorm";
-import { Pessoa } from "../../entity/User";
+import { People } from "../../entity/Peopple";
 import { ITokenResponse } from "./authenticator.interface";
 
 export const APP_AUTH_SECRET = 'dsahufhuasduhfuhadsuhf'
@@ -50,24 +49,24 @@ class AuthenticatorController {
             response.status(400).send({ erro: 'password field is required!' })
         }
         
-        const userRepository = getRepository(Pessoa);
-        const pessoa = await userRepository
-            .createQueryBuilder("pessoa")
-            .where("pessoa.email_pes = :email", { email: user })
+        const peopleRepository = getRepository(People);
+        const people = await peopleRepository
+            .createQueryBuilder("p")
+            .where("p.email_peo = :email", { email: user })
             .getOne();
 
-        if (!pessoa) {
+        if (!people) {
             response.status(401).send({ erro: 'email not is valid' });
             } else {
 
-            if (!bcrypt.compareSync(password, pessoa.senha_pes)) {
-                response.status(401).send({ erro: 'password not is valid!' });
-            }
+            // if (!bcrypt.compareSync(password, people.senha_peo)) {
+            //     response.status(401).send({ erro: 'password not is valid!' });
+            // }
 
             const auth: ITokenResponse = {
-                id: pessoa.id_pes,
-                email: pessoa.email_pes,
-                name: pessoa.nome_pes
+                id: people.id_peo,
+                email: people.email_peo,
+                name: people.sobre_nome_peo
             }
 
             let payload = { auth };

@@ -1,9 +1,9 @@
 {
    "type": "postgres",
-   "host": "db",
+   "host": "localhost",
    "port": 5432,
    "username": "postgres",
-   "password": "postgres",
+   "password": "lmmaster",
    "database": "example",
    "synchronize": false,
    "logging": false,

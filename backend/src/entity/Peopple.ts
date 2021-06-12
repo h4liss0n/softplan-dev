@@ -1,21 +1,21 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Pessoa {
+export class People {
 
     @PrimaryGeneratedColumn()
-    id_pes: number;
+    id_peo: number;
 
     @Column()
-    nome_pes: string;
+    nome_peo: string;
 
     @Column()
-    sobre_nome_pes: string;
+    sobre_nome_peo: string;
 
     @Column()
-    email_pes: string;
+    email_peo: string;
 
     @Column()
-    senha_pes: string;
+    senha_peo: string;
 
 }

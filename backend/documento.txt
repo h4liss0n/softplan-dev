@@ -1,3 +1,7 @@
+npm run typeorm migration:run
+
+
+
 banco de dados
     versão: postgresql-13.1-1-windows-x64
     porta: 5433

@@ -30,12 +30,36 @@
     "typeorm": "0.2.32"
   },
   "scripts": {
-    "exec": "node index.js",
+    "exec": "npm run typeorm migration:run && node index.js",
     "start": "ts-node src/index.ts",
     "dev": "nodemon start",
     "copytemp": "copyfiles temp temp/*.txt build",
     "copytemplate": "copyfiles template template/*.html build",
-    "build": "npm run copytemp && npm run copytemplate && tsc -p ."
+    "build": "npm run copytemp && npm run copytemplate && tsc -p .",    
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "start:dev": "npx ts-node-dev src/index.ts",
+    "start:prod": "node src/index.js",
+    "migrateAndRun:dev": "npm run typeorm:dev:migration:run && npm run start:dev",
+    "migrateAndRun:prod": "npm run typeorm:prod:migration:run && npm run start:prod",    
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typeorm:dev": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm:prod": "./node_modules/typeorm/cli.js",
+    "typeorm:dev:migration:run": "npm run typeorm:dev -- migration:run",
+    "typeorm:prod:migration:run": "npm run typeorm:prod -- migration:run",
+    "typeorm:dev:migration:create": "npm run typeorm:dev -- migration:create -n",
+    "typeorm:prod:migration:create": "npm run typeorm:prod -- migration:create -n"
+
+
+
+
+
+
+
+
+
+
+
+
   },
   "nodemonConfig": {
     "ext": "ts",

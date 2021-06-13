@@ -3,16 +3,39 @@ import { getRepository } from 'typeorm';
 import { People } from './../../entity/Peopple';
 
 
-const existEmail = async (emai: string) => {
+const existEmailLogin = (id: number, email: string): Promise<boolean> => {
     const peopleRepository = getRepository(People);
-    const validEmail = await peopleRepository
+    return peopleRepository
         .createQueryBuilder()
-        .where("login_email_peo  = :email_peo", { emai })
-        .getMany()
-
-    return validEmail.length > 0;
-
+        .where(" id_peo  <> :id ", { id })
+        .andWhere("upper(login_email_peo)  = upper(:email)", { email })
+        .getOne().
+        then(value => value ? true : false)
 }
+
+
+const existEmail = (id: number, email: string): Promise<boolean> => {
+    const peopleRepository = getRepository(People);
+    return peopleRepository
+        .createQueryBuilder()
+        .where(" id_peo  <> :id ", { id })
+        .andWhere("upper(email_peo)  = upper(:email)", { email })
+        .getOne().
+        then(value => value ? true : false)
+}
+
+
+
+const existCPF = (id: number, cpf: string): Promise<boolean> => {
+    const peopleRepository = getRepository(People);    
+    return peopleRepository
+        .createQueryBuilder()
+        .where(" id_peo  <> :id ", { id })
+        .andWhere("upper(cpf_peo)  = upper(:cpf)", { cpf })
+        .getOne().
+        then(value => value ? true : false)
+}
+
 
 
 
@@ -49,28 +72,28 @@ export class peopleController {
 
     static save = async (request: Request, response: Response, next: NextFunction) => {
 
-        const { password_peo, email_peo, cpf_peo } = request.body;
+        const { password_peo, email_peo, cpf_peo, login_email_peo } = request.body;
+
         if (!password_peo) {
             response.status(203).send({ erro: 'password_peo field is required!' })
             return
         }
 
-        let peopleRepository = getRepository(People);
-
-        
+        const peopleRepository = getRepository(People);
 
 
-        if (existEmail(email_peo)) {
-            response.status(203).send({ erro: 'email is already in use by another user' })
+        if (await existEmailLogin(0, login_email_peo)) {
+            response.status(203).send({ erro: `email of login is already in use by another user:  ${email_peo}` })
             return;
         }
 
-        const validCPF = await peopleRepository
-            .createQueryBuilder()
-            .where("cpf_peo  = :cpf_peo", { cpf_peo })
-            .getOne()
 
-        if (validCPF) {
+        if (await existEmail(0, email_peo)) {
+            response.status(203).send({ erro: `email is already in use by another user:  ${email_peo}` })
+            return;
+        }
+
+        if (await existCPF(0, cpf_peo)) {
             response.status(203).send({ erro: 'CPF is already in use by another user' })
             return;
         }
@@ -107,7 +130,7 @@ export class peopleController {
 
     static update = async (request: Request, response: Response, next: NextFunction) => {
 
-        const { id_peo, email_peo, cpf_peo } = request.body;
+        const { id_peo, email_peo, cpf_peo, login_email_peo } = request.body;
 
         if (!id_peo) {
             response.status(400).send({ erro: 'id_peo field is required!' })
@@ -123,25 +146,19 @@ export class peopleController {
         }
 
 
-        const validEmail = await peopleRepository
-            .createQueryBuilder()
-            .where('id_peo <> :id_peo', { id_peo })
-            .andWhere("login_email_peo  = :email_peo", { email_peo })
-            .getOne()
 
-        if (validEmail) {
-            response.status(203).send({ erro: `email is already in use by another user ${validEmail.id_peo}` })
+        if (await existEmailLogin(id_peo, login_email_peo)) {
+            response.status(203).send({ erro: `email of login is already in use by another user:  ${email_peo}` })
             return;
         }
 
 
-        const validCPF = await peopleRepository
-            .createQueryBuilder()
-            .where('id_peo <> :id_peo', { id_peo })
-            .andWhere("cpf_peo  = :cpf_peo", { cpf_peo })
-            .getOne()
+        if (await existEmail(id_peo, email_peo)) {
+            response.status(203).send({ erro: `email is already in use by another user:  ${email_peo}` })
+            return;
+        }
 
-        if (validCPF) {
+        if (await existCPF(id_peo, cpf_peo)) {
             response.status(203).send({ erro: 'CPF is already in use by another user' })
             return;
         }
@@ -183,7 +200,7 @@ export class peopleController {
             return;
         }
         const rem = await peopleRepository.remove(peopleToRemove);
-        response.status(200).send(rem)
+        response.status(204).send(rem)
 
     }
 

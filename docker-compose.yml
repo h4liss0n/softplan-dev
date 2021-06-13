@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: example
+    # volumes:
+    #   - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "8432:5432"
+  serve:    
+    image: h4liss0n/dev.sotfplan.backend:01      
+    depends_on:
+      - db    
+    restart: always    
+    ports:
+      - 8090:8080          
+  web:    
+    image: h4liss0n/dev.sotfplan.frontend:01      
+    depends_on:      
+      - serve
+    restart: always    
+    ports:
+      - 8080:80    

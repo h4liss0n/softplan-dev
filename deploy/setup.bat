@@ -17,7 +17,7 @@ pause
 cd C:\GitHub\softplan-dev\backend
 docker build --pull --rm -f "Dockerfile" -t h4liss0n/dev.sotfplan.backend:%ver%  "."
 
-cd C:\GitHub\abba-controller\frontend
+cd C:\GitHub\softplan-dev\frontend
 docker build --pull --rm -f "Dockerfile" -t h4liss0n/dev.sotfplan.frontend:%ver%  "."
 
 

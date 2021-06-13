@@ -12,12 +12,13 @@ import { PErro } from '../../../Components/PErro/PErro';
 import { Api } from '../../../Service/Api';
 import RouterHistory from '../../../Service/History';
 import { ApplicationState } from '../../../Store';
-import { toNumber } from '../../../Utils/Converter';
+import { toDateString, toNumber } from '../../../Utils/Converter';
 import { normalizeCPF, normalizePressPreventSubmit } from '../../../Utils/Normalize';
 import { testCPF, validDate } from '../../../Utils/ResolverYup';
 import { IParamPeople, IPeople } from '../people.interface';
 import { CadPeopleContext } from './PeopleForm.Context';
 import './PeopleForm.css';
+let fakePeople = require('fake-people');
 
 interface IProps { }
 
@@ -162,6 +163,7 @@ const ClienteCadastroPrincial: React.FC<IProps> = (props) => {
 
       if (toNumber(value.id_peo) === 0) {
         const res = await Api.post('/api/v1/people', value);
+        console.log(res)
         if (res.status === 201) {
           toast.success('person successfully registered!');
           RouterHistory.goBack();
@@ -186,8 +188,28 @@ const ClienteCadastroPrincial: React.FC<IProps> = (props) => {
     }
   });
 
+  const createFalseDate = () => {
+
+    const fake = fakePeople.generate(0);
+
+    console.log(fake)
+    setValue('name_peo', fake.firstName);
+    setValue('last_name_peo', fake.lastName);    
+    setValue('birth_date_peo', toDateString(fake.birthday));
+    setValue('email_peo', fake.contacts.email);    
+    setValue('cpf_peo', fake.documents.cpf);
+    setValue('login_email_peo', fake.contacts.email);
+    setValue('password_peo', '123');
+  }
+
   return (
     <div className="container">
+      <section className="whapper-frm">
+        <section className="whapper">
+          <button className="btn-list add" onClick={createFalseDate}  >create false data for the person</button>
+        </section>
+      </section>
+
       <Loading isloading={isLoading} />
       <form className="whapper-frm" id="frm" onSubmit={handlePostCliente} autoComplete="off" onKeyPress={normalizePressPreventSubmit} noValidate>
         <section className="whapper-group">

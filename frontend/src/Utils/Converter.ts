@@ -13,9 +13,9 @@ const toDateNow = () => {
     return moment().format('yyyy-MM-DD');
 }
 
-const toDateString = (value: string | undefined | null) => {
+const toDateString = (value: string | undefined | null | any) => {
     if (moment(value).isValid()) return moment(value).format('yyyy-MM-DD')
-    return null
+    return ''
 }
 
 const toMonthStartString = (value: string | undefined) => {

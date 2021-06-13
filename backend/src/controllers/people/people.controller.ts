@@ -3,6 +3,17 @@ import { getRepository } from 'typeorm';
 import { People } from './../../entity/Peopple';
 
 
+const existEmail = async (emai: string) => {
+    const peopleRepository = getRepository(People);
+    const validEmail = await peopleRepository
+        .createQueryBuilder()
+        .where("login_email_peo  = :email_peo", { emai })
+        .getMany()
+
+    return validEmail.length > 0;
+
+}
+
 
 
 export class peopleController {
@@ -44,16 +55,12 @@ export class peopleController {
             return
         }
 
-
         let peopleRepository = getRepository(People);
 
-        const validEmail = await peopleRepository
-            .createQueryBuilder()
-            .where("login_email_peo  = :email_peo", { email_peo })
-            .getMany()
+        
 
 
-        if (validEmail.length > 0) {
+        if (existEmail(email_peo)) {
             response.status(203).send({ erro: 'email is already in use by another user' })
             return;
         }
@@ -84,13 +91,14 @@ export class peopleController {
             people.nationality_peo = request.body.nationality_peo;
             people.birth_date_peo = request.body.birth_date_peo;
             people.cpf_peo = request.body.cpf_peo;
-            people.create_date_peo = new Date();        
+            people.create_date_peo = new Date();
+            people.update_date_peo = new Date();
 
             const res = await peopleRepository.save(people);
             response.status(201).send(res)
 
         } catch (error) {
-            response.status(206).send({ error })
+            response.status(206).send({ erro: error.message })
         }
 
 
@@ -149,10 +157,10 @@ export class peopleController {
         peopleToUpdate.nationality_peo = request.body.nationality_peo;
         peopleToUpdate.birth_date_peo = request.body.birth_date_peo;
         peopleToUpdate.cpf_peo = request.body.cpf_peo;
-        peopleToUpdate.update_date_peo = new Date();        
-
+        peopleToUpdate.update_date_peo = new Date();
         const pessoa = await peopleRepository.save(peopleToUpdate);
         response.status(200).send({ id_peo: pessoa.id_peo })
+
 
     }
 

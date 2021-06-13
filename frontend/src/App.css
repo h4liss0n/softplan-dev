@@ -1,0 +1,13 @@
+.app-main {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "menu-left menu-top"
+    "menu-left main";
+}
+
+.app-router {
+  grid-area: main;   
+}

@@ -1,0 +1,18 @@
+.filter-validade {  
+    padding: 10px;
+    color: var(--color-7);
+    background-color: var(--color-0);
+    font-size: 1.4rem;
+    
+    margin: 10px 0;
+    padding: 10px;
+    border-top: 1px solid var(--color-8);
+    border-bottom: 1px solid var(--color-8);
+  }
+  .filter-validade label {
+    color: var(--color-8);
+  }
+  
+  .filter-validade p {
+    color: var(--color-8);
+  }

@@ -7,15 +7,43 @@ export class People {
     id_peo: number;
 
     @Column()
-    nome_peo: string;
+    name_peo: string;
 
     @Column()
-    sobre_nome_peo: string;
+    last_name_peo: string;
+
+    @Column()
+    login_email_peo: string;
+
+    @Column()
+    password_peo: string;
 
     @Column()
     email_peo: string;
 
-    @Column()
-    senha_peo: string;
+    @Column({ nullable: true })
+    sex_peo: string;
+
+    @Column({ nullable: false })
+    naturalness_peo: string
+
+    @Column({ nullable: false })
+    nationality_peo :string
+
+    @Column({ type: "date", nullable: false })
+    birth_date_peo: Date;
+
+    @Column({ nullable: false })
+    cpf_peo :string        
+    
+    @Column({type:"timestamp"})
+    create_date_peo: Date;
+
+    @Column({type:"timestamp"})
+    update_date_peo: Date;
+
+
+
+
 
 }

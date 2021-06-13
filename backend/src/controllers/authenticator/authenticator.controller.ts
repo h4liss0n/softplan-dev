@@ -1,5 +1,4 @@
 import * as base64 from "base-64";
-import * as bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import * as jwt from "jwt-simple";
 import { getRepository } from "typeorm";
@@ -17,10 +16,10 @@ class AuthenticatorController {
         // pegar apenas o token
         if (token.split(' ').length > 0) token = token.split(' ')[1]
 
-        const secret = 'dhfasuhfhsdaufhsduf@123';
+        
         let decoded = undefined;
         try {
-            decoded = jwt.decode(token, secret);
+            decoded = jwt.decode(token, APP_AUTH_SECRET);
 
             response.status(200).send('Autorization');
         } catch (error) {
@@ -53,21 +52,23 @@ class AuthenticatorController {
         const peopleRepository = getRepository(People);
         const people = await peopleRepository
             .createQueryBuilder("p")
-            .where("p.email_peo = :email", { email: user })
+            .where("p.login_email_peo = :email", { email: user })
             .getOne();
 
         if (!people) {
             response.status(401).send({ erro: 'email not is valid' });
+            return
         }
 
-        if (!bcrypt.compareSync(password, people.senha_peo)) {
+        if ( password !== people.password_peo) {
             response.status(401).send({ erro: 'password not is valid!' });
+            return
         }
 
         const auth: ITokenResponse = {
             id: people.id_peo,
-            email: people.email_peo,
-            name: people.sobre_nome_peo
+            email: people.login_email_peo,
+            name: people.name_peo
         }
 
         let payload = { auth };

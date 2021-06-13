@@ -48,18 +48,6 @@
     "typeorm:prod:migration:run": "npm run typeorm:prod -- migration:run",
     "typeorm:dev:migration:create": "npm run typeorm:dev -- migration:create -n",
     "typeorm:prod:migration:create": "npm run typeorm:prod -- migration:create -n"
-
-
-
-
-
-
-
-
-
-
-
-
   },
   "nodemonConfig": {
     "ext": "ts",

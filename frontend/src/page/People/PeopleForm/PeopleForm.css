@@ -1,0 +1,12 @@
+.footer-total {
+  margin-top: 10px;
+  font-size: 1.4rem;
+}
+
+.header-item {
+  margin-top: 10px;
+  border-bottom: solid 1px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  font-size: 1.5rem;
+}

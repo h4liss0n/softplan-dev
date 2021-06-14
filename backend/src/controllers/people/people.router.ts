@@ -14,7 +14,7 @@ const PeopleRouter = Router();
  * @returns {Response.model} 200 - array of Person
  * @security JWT
  */
-PeopleRouter.get("/api/v1/people", AuthMiddleware, peopleController.all);
+PeopleRouter.get("/api/v1/people",AuthMiddleware,  peopleController.all);
 
 /**
  * create new person

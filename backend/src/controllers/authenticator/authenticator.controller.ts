@@ -16,7 +16,7 @@ class AuthenticatorController {
         // pegar apenas o token
         if (token.split(' ').length > 0) token = token.split(' ')[1]
 
-        
+
         let decoded = undefined;
         try {
             decoded = jwt.decode(token, APP_AUTH_SECRET);
@@ -27,26 +27,28 @@ class AuthenticatorController {
         }
 
     }
-    static authentication = async (request: Request, response: Response, next: NextFunction) => {
-
-
-
+    static authentication = async (request: Request, response: Response, next: NextFunction) => {        
         let user = '';
         let password = '';
         let headerAuth = request.headers.authorization || '';
-        headerAuth = base64.decode(headerAuth.split(' ')[1])
+        headerAuth = base64.decode(headerAuth.split(' ').length === 2 ? headerAuth.split(' ')[1] : '')
 
-        user = headerAuth.split(':')[0];
-        password = headerAuth.split(':')[1];
+        if (headerAuth.split(':').length = 2) {
+            user = headerAuth.split(':')[0];
+            password = headerAuth.split(':')[1];
+        }
 
-        console.log(user, password)
+
+
 
         if (!user) {
-            response.status(400).send({ erro: 'email field is required!' })
+            response.status(401).send({ erro: 'email field is required!' })
+            return
         }
 
         if (!password) {
-            response.status(400).send({ erro: 'password field is required!' })
+            response.status(401).send({ erro: 'password field is required!' })
+            return 
         }
 
         const peopleRepository = getRepository(People);
@@ -60,7 +62,7 @@ class AuthenticatorController {
             return
         }
 
-        if ( password !== people.password_peo) {
+        if (password !== people.password_peo) {
             response.status(401).send({ erro: 'password not is valid!' });
             return
         }

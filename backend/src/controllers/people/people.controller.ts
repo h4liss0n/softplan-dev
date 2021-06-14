@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { getRepository } from 'typeorm';
+import { isValidCPF } from "../../util/validade";
 import { People } from './../../entity/Peopple';
 
 
@@ -27,7 +28,7 @@ const existEmail = (id: number, email: string): Promise<boolean> => {
 
 
 const existCPF = (id: number, cpf: string): Promise<boolean> => {
-    const peopleRepository = getRepository(People);    
+    const peopleRepository = getRepository(People);
     return peopleRepository
         .createQueryBuilder()
         .where(" id_peo  <> :id ", { id })
@@ -43,7 +44,6 @@ export class peopleController {
 
 
     static all = async (request: Request, response: Response, next: NextFunction) => {
-
 
         const id = request.query.id as string;
         const name = request.query.name as string;
@@ -77,6 +77,11 @@ export class peopleController {
         if (!password_peo) {
             response.status(203).send({ erro: 'password_peo field is required!' })
             return
+        }
+
+        if (!isValidCPF(cpf_peo)) {
+            response.status(203).send({ erro: 'It is not valid' })
+            return;
         }
 
         const peopleRepository = getRepository(People);
@@ -134,6 +139,11 @@ export class peopleController {
 
         if (!id_peo) {
             response.status(400).send({ erro: 'id_peo field is required!' })
+            return;
+        }
+
+        if (!isValidCPF(cpf_peo)) {
+            response.status(203).send({ erro: 'It is not valid' })
             return;
         }
 

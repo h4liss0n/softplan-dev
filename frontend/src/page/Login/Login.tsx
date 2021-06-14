@@ -67,20 +67,20 @@ const Login: React.FC<IProps> = (props) => {
           <h1>Enter your email or username</h1>
           <img className="img-login" src={img} alt="" />
         </div>
-        <form action="submit" className="login-form box-form" onSubmit={onSubmit}  noValidate>
+        <form data-testid="frm-login" action="submit" className="login-form box-form" onSubmit={onSubmit}  noValidate>
           <section className="login-input">
             <label>E-mail</label>
-            <input type="email" className="input-test" {...register('email', { required: 'E-mail! is required' })} />
+            <input data-testid="email" type="email" className="input-test" {...register('email', { required: 'E-mail! is required' })} />
             {errors?.email && <PErro>{errors.email.message}</PErro>}
           </section>
 
           <section className="login-input">
             <label>Password</label>
-            <input type="password" className="input-test" {...register('password', { required: 'password is required!' })} />
+            <input data-testid="password" type="password" className="input-test" {...register('password', { required: 'password is required!' })} />
             {errors?.password && <PErro>{errors.password.message}</PErro>}
           </section>
 
-          <button className="btn-salvar" type="submit">
+          <button data-testid="btn-login" className="btn-salvar" type="submit">
             Join
           </button>
         </form>

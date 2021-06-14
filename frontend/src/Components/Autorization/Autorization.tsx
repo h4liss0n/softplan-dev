@@ -15,8 +15,7 @@ const Autorization: React.FC<IProps> = (Props: IProps) => {
 
     Api.post("/api/v1/autorizarion", {})
       .then((res: any) => { })
-      .catch((erro) => {
-        console.error(erro)
+      .catch((erro) => {       
 
         dispatch(Action.RequestLogout());
 

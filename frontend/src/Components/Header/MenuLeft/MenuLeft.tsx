@@ -43,7 +43,7 @@ const MenuLeft: React.FC<IProps> = (props) => {
             </li>
           </ul>
           <ul>
-            <li onClick={() => handleClickLogout()}>
+            <li onClick={() => handleClickLogout()}  data-testid="btn-logooff" >
               <FontAwesomeIcon icon={faPowerOff} size="2x" />
               <label className="label-menu">Off</label>
             </li>

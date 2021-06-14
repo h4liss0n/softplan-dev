@@ -19,7 +19,7 @@ const MenuTop: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <section className="menu-top">
+      <section data-testid="header-login" className="menu-top">
         <div className="menu-top-bar">
           <FontAwesomeIcon
             icon={faBars}

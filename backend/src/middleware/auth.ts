@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import * as jwt from "jwt-simple";
-import { APP_AUTH_SECRET } from "../controllers/Authenticator/authenticator.controller";
-
+import { APP_AUTH_SECRET } from "../controllers/auth/authenticator.controller";
 
 
 const AuthMiddleware = (req: Request, resp: Response, next) => {

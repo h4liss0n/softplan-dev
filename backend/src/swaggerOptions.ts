@@ -22,8 +22,10 @@ const options = {
     },
     basedir: __dirname,
     files: [
-        './controllers/authenticator/**/*.ts',
-        './controllers/people/**/*.ts'
+        './controllers/auth/**/*.ts',
+        './controllers/auth/**/*.js',
+        './controllers/people/**/*.ts',
+        './controllers/people/**/*.js'
     ]
 };
 

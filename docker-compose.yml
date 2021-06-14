@@ -17,7 +17,7 @@ services:
       - db    
     restart: always    
     ports:
-      - 8090:8080          
+      - 8090:8090        
   web:    
     image: h4liss0n/dev.sotfplan.frontend:01      
     depends_on:      

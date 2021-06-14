@@ -12,7 +12,7 @@ xcopy /S /E "backend\*.*" "C:\GitHub\softplan-dev\backend"
 call "C:\GitHub\softplan-dev\deploy\build-backend.bat"
 call "C:\GitHub\softplan-dev\deploy\build-frontend.bat"
 
-pause
+
 
 cd C:\GitHub\softplan-dev\backend
 docker build --pull --rm -f "Dockerfile" -t h4liss0n/dev.sotfplan.backend:%ver%  "."

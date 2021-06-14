@@ -1,13 +1,14 @@
 
+import "reflect-metadata";
+import { createConnection } from "typeorm";
 import app from './app';
-import connection from './connection';
 
-connection.create().then(
-    () => {
-        app.listen('8090');
-        console.log(`localhost:8090`);
-    }
-)
+createConnection().then(async connection => {
+    app.listen('8090');
+    console.log(`localhost:8090`);
+}).catch(error => console.log(
+    `Erro ao conectar banco de dados!`, error));
+
 
 
 

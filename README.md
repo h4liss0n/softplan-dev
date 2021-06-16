@@ -26,10 +26,9 @@ A aplicação deverá estar disponível em uma imagem docker a partir do docker-
 A aplicação deverá possuir um endpoint /source acessível sem autenticação via HTTP GET que deverá retornar o link do projeto no github com o código fonte do projeto desenvolvido.
 
 ### Extras
-- A aplicação rodando em algum ambiente em nuvem.
--	Teste de integração da API em linguagem de sua preferência (Damos importância para pirâmide de testes)
--	A API desenvolvida em REST, seguindo o modelo de maturidade de Richardson ou utilizando GraphQL.
--	A API deverá conter documentação executável que poderá ser utilizada durante seu desenvolvimento. (Utilizar swagger)
--	Integração com OAuth 2 Google (https://developers.google.com/identity/protocols/OAuth2)
--	Implementar Chat entre as pessoas que estão na aplicação
--	Versão 2 da API que deve incluir endereço da pessoa como dado obrigatório. Versão 1 deve continuar funcionando.
+-	Teste de integração da API em linguagem de sua preferência (Damos importância para pirâmide de testes) 👍
+-	A API desenvolvida em REST, seguindo o modelo de maturidade de Richardson ou utilizando GraphQL.😒
+-	A API deverá conter documentação executável que poderá ser utilizada durante seu desenvolvimento. (Utilizar swagger)👍
+-	Integração com OAuth 2 Google (https://developers.google.com/identity/protocols/OAuth2) 😒
+-	Implementar Chat entre as pessoas que estão na aplicação 👍
+-	Versão 2 da API que deve incluir endereço da pessoa como dado obrigatório. Versão 1 deve continuar funcionando.🤣

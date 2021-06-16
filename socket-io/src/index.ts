@@ -41,11 +41,8 @@ io.on("connection", (socket: ISocket) => {
             username: (socket as ISocket).username,
         });
     }
-
     socket.emit("users", users);
     
-
-
     socket.broadcast.emit("user connected", {
         userID: socket.id,
         username: socket.username,

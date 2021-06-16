@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import "./App.css";
+import { Chat } from "./Components/Chat/Chat";
 import { Header } from "./Components/Header/Index";
 import Rotas from "./Router/Rotas";
 import { persistor, store } from "./Store";
@@ -22,6 +23,7 @@ function App() {
               <Rotas />
             </PersistGate>
           </section>
+          <Chat />
         </Provider>
       </section>
     </>

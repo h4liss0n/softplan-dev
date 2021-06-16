@@ -4,12 +4,14 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import { IAuthState } from './Auth/Types';
+import { IUser } from './Chat/Types';
 import rootReducers from './RootReducers';
 import rootSaga from './RootSaga';
 
 
 export interface ApplicationState {
     auth: IAuthState,
+    chat: IUser[] 
 }
 
 const persistConfig = {
@@ -32,9 +34,6 @@ const store = createStore(
     ));
 
 sagaMiddleware.run(rootSaga);
-
-
-
 
 const persistor = persistStore(store);
 

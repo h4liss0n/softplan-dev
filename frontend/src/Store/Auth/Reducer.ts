@@ -1,6 +1,8 @@
-
+import * as jwt from "jwt-simple";
 import { toast } from "react-toastify";
 import { AuthActionTypes, AuthenticationAction, IAuthState } from "./Types";
+
+
 
 const INITIAL_STATE: IAuthState = {
   token: '',
@@ -16,14 +18,16 @@ export default function AuthReducer(state = INITIAL_STATE, action: Authenticatio
     case AuthActionTypes.REQUEST_LOGIN: {
       return { ...state, loading: true };
     }
-    case AuthActionTypes.LOGIN_SUCESSE: {    
+    case AuthActionTypes.LOGIN_SUCESSE: {      
+      const info =jwt.decode(action.payload.token, '', true);
+      
       return {
         ...state,
         loading: false,
         token: action.payload.token,
         isAuthenticated: true,
-        nome: '',
-        id: '',
+        nome: info.auth.name,
+        id: info.auth.id,
         developer: false
       };
     }
@@ -37,5 +41,7 @@ export default function AuthReducer(state = INITIAL_STATE, action: Authenticatio
   }
   return state;
 }
+
+
 
 

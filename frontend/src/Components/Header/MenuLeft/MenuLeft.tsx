@@ -4,8 +4,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RouterHistory from "../../../Service/History";
+import { ApplicationState } from "../../../Store";
 import * as Action from "../../../Store/Auth/Action";
 import { MenuContext } from "../Header.Context";
 import "./MenuLeft.css";
@@ -13,6 +14,7 @@ import "./MenuLeft.css";
 interface IProps { }
 
 const MenuLeft: React.FC<IProps> = (props) => {
+  const store = useSelector((store: ApplicationState) => store);
   const { menuOn, setMenuOn } = useContext(MenuContext);
   const dispatch = useDispatch();
   const getMenuOn = (Value: string) => {
@@ -33,7 +35,7 @@ const MenuLeft: React.FC<IProps> = (props) => {
       <section className={getMenuOn("menu-left")}>
         <section className="menu-left-avatar">
           <img src="https://source.unsplash.com/user/erondu/50x50" alt="" />
-          <label>User</label>
+          <label>{store.auth.nome}</label>
         </section>
         <section className="menu-left-btn">
           <ul>

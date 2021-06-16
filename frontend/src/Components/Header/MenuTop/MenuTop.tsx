@@ -8,14 +8,11 @@ import "./MenuTop.css";
 
 
 
-interface IProps {}
+interface IProps { }
 
 const MenuTop: React.FC<IProps> = (props) => {
   const { menuOn, setMenuOn } = useContext(MenuContext);
 
-  
-
-  
 
   return (
     <>
@@ -28,10 +25,10 @@ const MenuTop: React.FC<IProps> = (props) => {
           />
         </div>
 
-        
+
         <div className="menu-top-search" />
 
-        
+
       </section>
     </>
   );

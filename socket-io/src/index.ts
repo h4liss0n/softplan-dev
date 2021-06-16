@@ -21,30 +21,6 @@ interface IUser {
     username: string;
 }
 
-const  dataUsers: IUser[] = [];
-
-const actionUser = {
-    Add: (user: IUser) => {
-        const exist = dataUsers.find((item) => item.userID == user.userID)
-        if (exist) return { user: exist }
-        dataUsers.push(user)
-
-        return { user }
-
-    },
-
-    remove: (id: string) => {
-        const index = dataUsers.findIndex((item) => item.userID === id);
-        if (index !== -1) {
-            return dataUsers.splice(index, 1)[0]
-        }
-    },
-
-}
-
-
-
-
 io.use((socket: ISocket, next) => {
     const username = socket.handshake.auth.username;
     if (!username) {
@@ -57,15 +33,17 @@ io.use((socket: ISocket, next) => {
 
 io.on("connection", (socket: ISocket) => {
 
-    for (let [id, socket] of io.of("/").sockets) {
 
-        actionUser.Add({
+    const users = [];
+    for (let [id, socket] of io.of("/").sockets) {
+        users.push({
             userID: id,
             username: (socket as ISocket).username,
-        })
-    }    
+        });
+    }
 
-    socket.emit("users", dataUsers );
+    socket.emit("users", users);
+    
 
 
     socket.broadcast.emit("user connected", {
@@ -73,17 +51,25 @@ io.on("connection", (socket: ISocket) => {
         username: socket.username,
     });
 
+    
 
-    socket.on('disconnect', () => {
-        const user = actionUser.remove(socket.id);
-        console.log(`left`, user, dataUsers.length)
+    socket.on('disconnect', () => {        
+        // console.log(`left`, socket.username )
+        socket.broadcast.emit("user disconnect", {
+            userID: socket.id,
+            username: socket.username,
+        });
+
     })
 
 
+    socket.on("private message", ({ content, to }) => {
+        socket.to(to).emit("private message", {
+          content,
+          from: socket.id,
+        });
+      });
 
-
-
-    
 });
 
 
@@ -92,7 +78,7 @@ io.on("connection", (socket: ISocket) => {
 
 
 httpServer.listen(8091, () => {
-    console.log(`localhost:8091`, dataUsers.length);
+    console.log(`localhost:8091`);
 })
 
 

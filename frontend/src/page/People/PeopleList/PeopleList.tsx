@@ -62,8 +62,6 @@ const PeopleList: React.FC<IProps> = (props) => {
   }, [search]);
 
   const Item: React.FC<IPropsItem> = (props) => {
-
-
     return (
       <div className="lista-item">
         <div className="lista-item-data">

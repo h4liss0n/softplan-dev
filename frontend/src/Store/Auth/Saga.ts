@@ -12,8 +12,13 @@ export interface ITokenRequest {
 }
 
 
+
+
+
+
+
 function* Requestlogin(data: any): any {
-  try {    
+  try {
     const basic = base64.encode(`${data.payload.email}:${data.payload.password}`);
     Api.defaults.headers.authorization = `basic ${basic}`;
     const res = yield call(Api.post, `/api/v1/authentication`);
@@ -21,9 +26,16 @@ function* Requestlogin(data: any): any {
     if (res.status === 401) {
       yield put(actions.LoginFalure());
       return;
-    }    
+    }
 
-    yield put(actions.LoginSucesse(res.data))
+    
+    
+
+    const loginSucesse: types.IloginSucesse = {
+      token: res.data.token
+    }
+
+    yield put(actions.LoginSucesse(loginSucesse))
     Api.defaults.headers.authorization = `bearer ${res.data.token}`;
 
     history.push('/home');

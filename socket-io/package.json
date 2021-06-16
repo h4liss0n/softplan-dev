@@ -1,0 +1,31 @@
+{
+   "name": "backend",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/cors": "^2.8.6",
+      "@types/node": "^8.0.29",
+      "nodemon": "^2.0.4",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "body-parser": "^1.19.0",
+      "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
+      "express": "^4.15.4",
+      "socket.io": "^4.0.1",
+      "uuid": "^8.3.2"
+   },
+   "scripts": {
+      "start": "ts-node src/index.ts",
+      "dev": "nodemon start"
+   },
+   "nodemonConfig": {
+      "ext": "ts",
+      "delay": "2500",
+      "watch": [
+         "src"
+      ]
+   }
+}

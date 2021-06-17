@@ -10,15 +10,12 @@ const socket = io(URL, { autoConnect: false });
 
 
 socket.onAny((event, ...args) => {
-    console.info('log', event, args);
+    // console.info('log', event, args);
 });
 
 
 socket.on("connect_error", (err) => {
-    console.log('connect_erro', err)
-    if (err.message === "invalid username") {
-
-    }
+    
 });
 
 
@@ -31,6 +28,7 @@ socket.on("users", (users: IUser[]) => {
             username: value.username,
             isOffline: value.isOffline,
             messages: [],
+            haveMessage: false,
             yourself: value.userID === socket.id
         })
 
@@ -49,7 +47,7 @@ socket.on("users", (users: IUser[]) => {
 
 
 socket.on("user connected", (user: IUser) => {
-    console.log('user connected', user)
+    
     store.dispatch(actions.ChatConnect(user))
 });
 
@@ -57,7 +55,7 @@ socket.on("user connected", (user: IUser) => {
 
 socket.on("user disconnect", (user: IUser) => {
 
-    // console.log('user disconnect', user)
+    
 
     // setListUser((oldState) => {
     //   const index = oldState.findIndex(usu => usu.username === user.username);
@@ -72,8 +70,14 @@ socket.on("user disconnect", (user: IUser) => {
 
 });
 
-socket.on("private message", (value: IPrivateMessage) => {
-    store.dispatch(actions.ChatPrivateMessage(value));
+socket.on("private message", (value) => {
+    const msg: IPrivateMessage = {
+        content: value.content,
+        from: value.from,
+        yourself: false
+    }
+
+    store.dispatch(actions.ChatPrivateMessage(msg));
 });
 
 

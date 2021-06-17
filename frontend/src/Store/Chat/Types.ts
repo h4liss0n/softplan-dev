@@ -9,9 +9,10 @@ export enum ChatActionTypes {
 }
 
 
-export interface IPrivateMessage {
-
-  content: string; from: string
+export interface IPrivateMessage {  
+  content: string,
+  from: string,
+  yourself: boolean,
 }
 
 export interface IUser {
@@ -19,6 +20,7 @@ export interface IUser {
   username: string;
   yourself: boolean,
   isOffline: boolean,
+  haveMessage: boolean,
   messages: IMessages[]
 }
 

@@ -296,6 +296,11 @@ label {
   justify-content: flex-start;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 .flex-align-items {
   display: flex;
   align-items: center;  

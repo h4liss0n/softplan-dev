@@ -1,3 +1,5 @@
+import { faComment, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import avatar from '../../img/avatar.png';
@@ -7,7 +9,7 @@ import * as Action from '../../Store/Chat/Action';
 import { IUser } from '../../Store/Chat/Types';
 import './Chat.css';
 
-interface IProps {}
+interface IProps { }
 
 interface IPropsRoom {
   user: IUser;
@@ -17,6 +19,7 @@ const Chat: React.FC<IProps> = () => {
   const dispatch = useDispatch();
 
   const users = useSelector((store: ApplicationState) => store.chat);
+  const [open, setOpen] = useState(false)
 
   const Room: React.FC<IPropsRoom> = ({ user }) => {
     const [content, setcontent] = useState('');
@@ -31,17 +34,17 @@ const Chat: React.FC<IProps> = () => {
       dispatch(
         Action.ChatPrivateMessage({
           content: content,
-          from: socket.id,
+          from: user.userID,
+          yourself: true
         })
       );
     };
 
     return (
-      <footer className="chat-room" key={user.userID}>
+      <footer className={open ? "chat-room chat-on" : "chat-room  chat-off"} key={user.userID}>
         <div className="chat-info-container">
           <img className="chat-avatar" src={avatar} alt="" />
           <div className="chat-info">
-            {/* <label htmlFor=""> {user.userID} </label> */}
             <label htmlFor=""> {user.username} </label>
             {/* <label htmlFor=""> {user.yourself ? 'sim' : 'nao'} </label> */}
             <label htmlFor=""> {user.isOffline ? 'off' : 'on'} </label>
@@ -53,7 +56,20 @@ const Chat: React.FC<IProps> = () => {
             {user.messages.map((m, i) => {
               return (
                 <div key={i}>
-                  <label className="chat-msg"> {m.content} </label>
+                  {m.fromSelf ?
+                    (
+                      <>
+                        <strong className="chat-msg chat-yourself">Yourself</strong>
+                        <label className="chat-msg chat-yourself" > {m.content} </label>
+                      </>
+                    ) : (
+                      <>
+                        <strong className="chat-msg chat-notyourself">{user.username}</strong>
+                        <label className="chat-msg chat-notyourself" > {m.content} </label>
+                      </>
+                    )}
+
+
                 </div>
               );
             })}
@@ -74,13 +90,25 @@ const Chat: React.FC<IProps> = () => {
         </div>
       </footer>
     );
-  };
+  };  
+
+  const haveMessage = () => {
+    return users.filter(f => f.haveMessage === true).length > 0;
+  }
 
   return (
-    <section className="chat-container">
-      {users.map((usu) => {
+    <section className={open ? "chat-container-on" : "chat-container-off"} >
+      {users.filter(u => u.yourself === false).map((usu) => {
         return <Room key={usu.userID} user={usu} />;
       })}
+
+      <header className={open ? "flex-end" : "flex-center"}  >
+        <button className={haveMessage() ? 'btn-chat-open chat-have-message' : 'btn-chat-open '} onClick={() => setOpen(!open)}>
+          <FontAwesomeIcon icon={open ? faMinus : faComment} size="2x" />
+
+        </button>
+      </header>
+
     </section>
   );
 };

@@ -1,4 +1,4 @@
-.chat-container {
+.chat-container-on {
   z-index: 1000;
   position: fixed;
   right: 250px;
@@ -8,6 +8,13 @@
   background: none;
   display: flex;
   flex-direction: column-reverse;
+}
+
+.chat-container-off {
+  z-index: 1000;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .chat-room {
@@ -33,16 +40,42 @@
 }
 
 .chat-message {
-  background: var(--color-1);
+  background: var(--color-0);
   padding: 5px;
   height: 200px;
   border-radius: 15px;
 }
 
 .chat-msg {
-  color: var(--color-8);
+  display: block;
 }
 
 .chat-send {
   display: flex;
+}
+
+.chat-notyourself {
+  text-align: left;
+}
+
+.chat-yourself {
+  text-align: end;
+}
+
+.chat-off {
+  display: none;
+}
+
+.btn-chat-open {
+  background: none;
+  border: none;
+  margin: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.chat-have-message {
+  animation: bounce; 
+  animation-duration: 3s;     
+  
 }

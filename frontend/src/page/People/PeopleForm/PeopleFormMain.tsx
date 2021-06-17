@@ -163,7 +163,7 @@ const ClienteCadastroPrincial: React.FC<IProps> = (props) => {
 
       if (toNumber(value.id_peo) === 0) {
         const res = await Api.post('/api/v1/people', value);
-        console.log(res)
+        
         if (res.status === 201) {
           toast.success('person successfully registered!');
           RouterHistory.goBack();
@@ -192,7 +192,7 @@ const ClienteCadastroPrincial: React.FC<IProps> = (props) => {
 
     const fake = fakePeople.generate(0);
 
-    console.log(fake)
+    
     setValue('name_peo', fake.firstName);
     setValue('last_name_peo', fake.lastName);    
     setValue('birth_date_peo', toDateString(fake.birthday));

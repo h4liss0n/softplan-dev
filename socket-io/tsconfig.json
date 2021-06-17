@@ -13,5 +13,6 @@
        "sourceMap": true,
        "esModuleInterop": false,
        "downlevelIteration": true
-    }
+    },
+    "exclude": ["__tests__", "node_modules"],
  }

@@ -3,5 +3,4 @@ backend/node_modules/*
 backend/build/*
 backend/pgdata/*
 socket-io/node_modules/*
-
-
+socket-io/build/*

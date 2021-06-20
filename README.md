@@ -36,6 +36,10 @@ A aplicação deverá possuir um endpoint /source acessível sem autenticação 
 
 ### Extras
 -	Teste de integração da API em linguagem de sua preferência (Damos importância para pirâmide de testes) 👍
+-	Teste backend
+![basic auth](https://github.com/h4liss0n/softplan-dev/blob/main/readme/jest-backend.gif)
+-	Teste frontend
+![basic auth](https://github.com/h4liss0n/softplan-dev/blob/main/readme/jest-frontend.gif)
 -	A API desenvolvida em REST, seguindo o modelo de maturidade de Richardson ou utilizando GraphQL.😒
 -	A API deverá conter documentação executável que poderá ser utilizada durante seu desenvolvimento. (Utilizar swagger)👍
 ![basic auth](https://github.com/h4liss0n/softplan-dev/blob/main/readme/sawgger1.gif)

@@ -1,12 +1,35 @@
 ### Desafio TécnicoDesafio TécnicoDesafio TécnicoDesafio Técnico
-
+### Deverá ser criada uma aplicação de cadastro de pessoas:Deverá ser criada uma aplicação de cadastro de pessoas:
 ![basic auth](https://github.com/h4liss0n/softplan-dev/blob/main/readme/telas.gif)
 
 
-Se você chegou até aqui é porque se interessou em ser um softplayer. Como temos muitas oportunidades para você colocar a mão na massa, queremos ver como você se sai com o cenário abaixo, por meio do qual conseguiremos avaliar várias de suas competências.
-A demanda
+Fontend: 
+- React 
+- CSS 
+- TypeScript  
+- Redux
+- Saga
 
-### Deverá ser criada uma aplicação de cadastro de pessoas:Deverá ser criada uma aplicação de cadastro de pessoas:
+Backend: 
+- Node 
+- TypeScript
+- TypeOrm 
+- Postgres 
+- Express
+
+Test
+ - backend jest (unitário e integração)
+ - frontend jest (integração)
+
+Chat
+- Sockect IO
+
+Deploy: 
+- Docker
+- nginx
+- nodeAlphine
+
+
 
 ### Back-end 
 - 	Nome - obrigatório

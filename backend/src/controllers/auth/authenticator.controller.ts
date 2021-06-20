@@ -2,8 +2,8 @@ import * as base64 from "base-64";
 import { NextFunction, Request, Response } from 'express';
 import * as jwt from "jwt-simple";
 import { getRepository } from "typeorm";
-import { People } from "../../entity/Peopple";
-import { ITokenResponse } from "./authenticator.interface";
+import { People } from './../../entity/Peopple';
+import { IGoogleProfile, ITokenResponse } from "./authenticator.interface";
 
 export const APP_AUTH_SECRET = 'dsahufhuasduhfuhadsuhf'
 
@@ -27,7 +27,7 @@ class AuthenticatorController {
         }
 
     }
-    static authentication = async (request: Request, response: Response, next: NextFunction) => {        
+    static authentication = async (request: Request, response: Response, next: NextFunction) => {
         let user = '';
         let password = '';
         let headerAuth = request.headers.authorization || '';
@@ -48,7 +48,7 @@ class AuthenticatorController {
 
         if (!password) {
             response.status(401).send({ erro: 'password field is required!' })
-            return 
+            return
         }
 
         const peopleRepository = getRepository(People);
@@ -66,6 +66,53 @@ class AuthenticatorController {
             response.status(401).send({ erro: 'password not is valid!' });
             return
         }
+
+        const auth: ITokenResponse = {
+            id: people.id_peo,
+            email: people.login_email_peo,
+            name: people.name_peo
+        }
+
+        let payload = { auth };
+        let secret = APP_AUTH_SECRET;
+        var token = jwt.encode(payload, secret);
+
+
+        response.status(200).send({ token: token });
+    }
+
+
+
+    static google = async (request: Request, response: Response, next: NextFunction) => {
+        const googleProfile = request.body.profileObj as IGoogleProfile
+        const peopleRepository = getRepository(People);
+        let  people = await peopleRepository
+            .createQueryBuilder("p")
+            .where("p.google_id_peo = :google_id_peo", { google_id_peo: googleProfile.googleId })
+            .getOne();
+
+        if (!people) {
+            const newPeople = new People;
+            newPeople.id_peo = 0;
+            newPeople.google_id_peo = googleProfile.googleId;
+            newPeople.name_peo = googleProfile.givenName;
+            newPeople.last_name_peo = googleProfile.familyName;
+            newPeople.email_peo  = googleProfile.email;
+            newPeople.login_email_peo  = googleProfile.email;
+            newPeople.password_peo  = '';
+            newPeople.naturalness_peo  = '';
+            newPeople.nationality_peo  = '';
+            newPeople.cpf_peo  = '';
+            newPeople.create_date_peo = new Date();
+            newPeople.update_date_peo = new Date();            
+            newPeople.birth_date_peo = new Date();            
+            newPeople.sex_peo = 'M';
+
+            people = await peopleRepository.save(newPeople);
+            
+
+        }
+        
 
         const auth: ITokenResponse = {
             id: people.id_peo,

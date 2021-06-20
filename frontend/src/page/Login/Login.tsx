@@ -7,9 +7,10 @@ import img from '../../img/login.png';
 import RouterHistory from '../../Service/History';
 import { ApplicationState } from '../../Store';
 import * as Action from '../../Store/Auth/Action';
+import { Google } from '../Google/Gooogle';
 import './Login.css';
 
-interface IProps {}
+interface IProps { }
 
 type FormValues = {
   email: string;
@@ -67,7 +68,7 @@ const Login: React.FC<IProps> = (props) => {
           <h1>Enter your email or username</h1>
           <img className="img-login" src={img} alt="" />
         </div>
-        <form data-testid="frm-login" action="submit" className="login-form box-form" onSubmit={onSubmit}  noValidate>
+        <form data-testid="frm-login" action="submit" className="login-form box-form" onSubmit={onSubmit} noValidate>
           <section className="login-input">
             <label>E-mail</label>
             <input data-testid="email" type="email" className="input-test" {...register('email', { required: 'E-mail! is required' })} />
@@ -80,10 +81,18 @@ const Login: React.FC<IProps> = (props) => {
             {errors?.password && <PErro>{errors.password.message}</PErro>}
           </section>
 
-          <button data-testid="btn-login" className="btn-salvar" type="submit">
-            Join
-          </button>
+          <div className="login-group-button">
+            <button data-testid="btn-login" className="btn-salvar" type="submit">
+              Join
+            </button>
+          </div>
+
         </form>
+        <div className="login-group-button">
+          <Google />
+        </div>
+
+
       </div>
     </div>
   );

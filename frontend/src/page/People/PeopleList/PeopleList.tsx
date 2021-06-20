@@ -136,6 +136,7 @@ const PeopleList: React.FC<IProps> = (props) => {
           <section className="whapper-search">
             <input
               type="text"
+              placeholder="Find by user name containing"
               value={search}
               onChange={(event) => {
                 setOnSearch(true);

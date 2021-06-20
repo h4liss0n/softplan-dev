@@ -26,7 +26,7 @@ const Rotas: React.FC = () => {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/login" component={Login} />        
         <PrivateRoute exact path="/home" component={PeopleList} />        
         <PrivateRoute exact path="/people/form/:id" component={PeopleForm} />        
         <PrivateRoute exact path="/people/form" component={PeopleForm} />        

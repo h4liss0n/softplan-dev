@@ -1,9 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { consultarCep } from 'correios-brasil';
 import { cpf } from 'cpf-cnpj-validator';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
@@ -11,7 +9,6 @@ import { Loading } from '../../../Components/Loading/Loading';
 import { PErro } from '../../../Components/PErro/PErro';
 import { Api } from '../../../Service/Api';
 import RouterHistory from '../../../Service/History';
-import { ApplicationState } from '../../../Store';
 import { toDateString, toNumber } from '../../../Utils/Converter';
 import { normalizeCPF, normalizePressPreventSubmit } from '../../../Utils/Normalize';
 import { testCPF, validDate } from '../../../Utils/ResolverYup';
@@ -59,17 +56,15 @@ const schema = yup.object().shape({
 
 
 const ClienteCadastroPrincial: React.FC<IProps> = (props) => {
-  const store = useSelector((store: ApplicationState) => store);
+  
   const params = useParams<IParamPeople>();
   const { people, setPeople } = useContext(CadPeopleContext);
 
   const [isLoading, setisLoading] = useState(false);
   const {
     register,
-    handleSubmit,
-    watch,
-    setValue,
-    getValues,
+    handleSubmit,  
+    setValue,    
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -78,38 +73,8 @@ const ClienteCadastroPrincial: React.FC<IProps> = (props) => {
     resolver: yupResolver(schema),
   });
 
-
-
-  interface ICep {
-    bairro: string;
-    cep: string;
-    complemento: string;
-    ddd: string;
-    gia: string;
-    ibge: string;
-    localidade: string;
-    logradouro: string;
-    siafi: string;
-    uf: string;
-  }
-
-  const handleBuscarCep = async () => {
-    setisLoading(true);
-    try {
-      const res = (await consultarCep(getValues('endereco_cep_peo'))) as any;
-      const cep = res as ICep;
-
-      if (cep) {
-        setValue('endereco_rua_peo', cep.logradouro);
-        setValue('endereco_bairro_peo', cep.bairro);
-        setValue('endereco_cidade_peo', cep.localidade);
-        setValue('endereco_uf_peo', cep.uf);
-      }
-    } catch (error) {
-      setisLoading(false);
-    }
-    setisLoading(false);
-  };
+  
+  
 
   useEffect(() => {
 

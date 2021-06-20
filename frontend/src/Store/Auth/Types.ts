@@ -1,7 +1,8 @@
 export enum AuthActionTypes {
     LOGIN_SUCESSE = "login@SUCESSE",
     REQUEST_LOGIN = "login@REQUEST",
-    REQUEST_LOGOUT = "logout@REQUEST",
+    REQUEST_LOGIN_GOOGLE = "logout@REQUEST_GOOGLE",
+    REQUEST_LOGOUT = "logout@REQUEST",    
     LOGIN_FALUERE = "login@FALURE",
     LOGIN_CREATUSER = "login@CREATEUSER",
     LOGIN_LOGOUT = "login@LOGOUT",
@@ -51,6 +52,11 @@ export interface IAuthSucess {
     payload: IloginSucesse;
 }
 
+export interface IAuthRequestGoogle {
+    type: AuthActionTypes.REQUEST_LOGIN_GOOGLE;
+    payload: any;
+}
+
 export interface IAuthRequest {
     type: AuthActionTypes.REQUEST_LOGIN;
     payload: IloginRequest;
@@ -74,7 +80,7 @@ export interface IPersistRehydrate {
 }
 
 
-export type AuthenticationAction = IAuthSucess | IAuthRequest | IAuthFalure | IAuthlogout | IAuthCreateUser | IPersistRehydrate;
+export type AuthenticationAction = IAuthSucess | IAuthRequest | IAuthFalure | IAuthlogout | IAuthCreateUser | IPersistRehydrate | IAuthRequestGoogle;
 
 
 

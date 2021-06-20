@@ -43,7 +43,8 @@ export class People {
     update_date_peo: Date;
 
 
-
+    @Column({ nullable: true })
+    google_id_peo :string        
 
 
 }

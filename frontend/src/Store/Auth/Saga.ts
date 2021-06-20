@@ -45,6 +45,32 @@ function* Requestlogin(data: any): any {
   }
 }
 
+
+function* RequestloginGoogle(data: any): any {
+  try {
+    
+    const res = yield call(Api.post, `/api/v1/auth/google`, {profileObj: data.payload.profileObj});
+
+    if (res.status === 401) {
+      yield put(actions.LoginFalure());
+      return;
+    }   
+    
+
+    const loginSucesse: types.IloginSucesse = {
+      token: res.data.token
+    }
+
+    yield put(actions.LoginSucesse(loginSucesse))
+    Api.defaults.headers.authorization = `bearer ${res.data.token}`;
+
+    history.push('/home');
+
+  } catch (error) {
+    yield put(actions.LoginFalure());
+  }
+}
+
 function* RequestLogout(data: any) {
   yield put(actions.LoginLogout());
   history.push('/login');
@@ -61,6 +87,7 @@ function* PersistRehydrate({ payload }: any) {
 
 function* AuthSaga() {
   yield takeLatest(types.AuthActionTypes.REQUEST_LOGIN, Requestlogin);
+  yield takeLatest(types.AuthActionTypes.REQUEST_LOGIN_GOOGLE, RequestloginGoogle);
   yield takeLatest(types.AuthActionTypes.PERSIST_REHYDRATE, PersistRehydrate);
   yield takeLatest(types.AuthActionTypes.REQUEST_LOGOUT, RequestLogout);
 }

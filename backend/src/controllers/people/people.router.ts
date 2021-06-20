@@ -11,7 +11,7 @@ const PeopleRouter = Router();
  * @group people - person  
  * @param {integer} id.query - id of people
  * @param {string} name.query - containing this name in the fristname
- * @returns {Response.model} 200 - array of Person
+ * @returns {string} 200 - array of Person
  * @security JWT
  */
 PeopleRouter.get("/api/v1/people",AuthMiddleware,  peopleController.all);

@@ -4,4 +4,3 @@ RUN npm install --production --silent && mv node_modules ../
 COPY /build /src
 EXPOSE 8091
 CMD ["npm", "run", "prod"]
-# CMD ["npm", "run", "start:prod"]

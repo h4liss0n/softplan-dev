@@ -8,6 +8,15 @@ export function RequestLogin(payload: IloginRequest) {
     };
 }
 
+export function RequestLoginGoogle(payload: any) {
+    return {
+        type: AuthActionTypes.REQUEST_LOGIN_GOOGLE,
+        payload
+
+    };
+}
+
+
 export function LoginSucesse(payload: IloginSucesse) {
     return {
         type: AuthActionTypes.LOGIN_SUCESSE,

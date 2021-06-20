@@ -1,12 +1,11 @@
 import { io } from "socket.io-client";
+import { REACT_APP_BASE_URL_CHAT } from "../Ambiente";
 import { store } from "../Store";
 import * as actions from '../Store/Chat/Action';
 import { IUser } from "../Store/Chat/Types";
 import { IPrivateMessage } from './../Store/Chat/Types';
 
-
-const URL = "http://localhost:8091";
-const socket = io(URL, { autoConnect: false });
+const socket = io(REACT_APP_BASE_URL_CHAT, { autoConnect: false });
 
 
 socket.onAny((event, ...args) => {

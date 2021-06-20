@@ -30,6 +30,16 @@
 }
 
 
+.login-group-button {
+  display: flex;
+  justify-content: center;
+}
+
+.login-group-button button {  
+  margin-top: 10px;
+  height: 50px;
+  width: 100%;  
+}
 
 @media (max-width: 1024px) {  
   .whapper-login {    

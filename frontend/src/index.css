@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   outline: 0;
-  color: var(--color-1);
+  color: var(--color-2);
 }
 
 body {
@@ -98,6 +98,7 @@ html {
 h1 {
   font-size: 1.4rem;
   margin-bottom: 10px;
+  color: var(--color-2)
 }
 
 .div-container {
@@ -130,7 +131,7 @@ input[type="number"] {
   appearance: none;
   padding: 10px 15px;
   margin-bottom: 10px;
-  color: var(--color-1);
+  color: var(--color-2);
   font-size: 1.4rem;
   background: var(--color-5);
   margin-top: 10px;
@@ -154,7 +155,7 @@ input[type="date"]
   appearance: none;
   padding: 8px 15px;
   margin-bottom: 10px;
-  color: var(--color-1);
+  color: var(--color-2);
   font-size: 1.4rem;
   background: var(--color-5);
   margin-top: 10px;
@@ -169,6 +170,7 @@ input[type="checkbox"] {
 
 input:read-only {
   background: var(--color-10);
+  color: var(--color-2);
 }
 
 
@@ -179,7 +181,7 @@ select {
   border: none;
   padding: 9px 15px;
   margin-bottom: 10px;
-  color: var(--color-1);
+  color: var(--color-2);
   font-size: 1.4rem;
   background: var(--color-5);
   margin-top: 10px;

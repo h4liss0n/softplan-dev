@@ -18,7 +18,10 @@
 }
 
 .chat-room {
-  margin: 10px;
+  margin: 10px; 
+  background: #27282f;
+  padding: 10px;
+
 }
 
 .chat-avatar {

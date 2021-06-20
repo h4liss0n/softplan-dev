@@ -1,3 +1,4 @@
+![install](https://user-images.githubusercontent.com/47496754/122684616-c307a300-d1dc-11eb-9644-37d28e8581db.gif)
 ### Desafio TécnicoDesafio TécnicoDesafio TécnicoDesafio Técnico
 Se você chegou até aqui é porque se interessou em ser um softplayer. Como temos muitas oportunidades para você colocar a mão na massa, queremos ver como você se sai com o cenário abaixo, por meio do qual conseguiremos avaliar várias de suas competências.
 A demanda
@@ -22,8 +23,9 @@ O acesso à aplicação só poderá ser realizado por um usuário pré-existente
 ### Instalação
 A aplicação deverá estar disponível em uma imagem docker a partir do docker-hub e não deve exigir configurações/parâmetros. Ou seja, ao rodar a imagem, deve levantar a aplicação e funcionar.
 
-[![install](install "install")](https://github.com/h4liss0n/softplan-dev/blob/main/readme/install.gif "install")
 
+
+![Farmers Market Finder Demo](https://github.com/h4liss0n/softplan-dev/blob/main/readme/install.gif)
 
 https://github.com/h4liss0n/softplan-dev/blob/main/readme/install.gif
 

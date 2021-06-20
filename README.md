@@ -1,4 +1,8 @@
 ### Desafio TécnicoDesafio TécnicoDesafio TécnicoDesafio Técnico
+
+![basic auth](https://github.com/h4liss0n/softplan-dev/blob/main/readme/telas.gif)
+
+
 Se você chegou até aqui é porque se interessou em ser um softplayer. Como temos muitas oportunidades para você colocar a mão na massa, queremos ver como você se sai com o cenário abaixo, por meio do qual conseguiremos avaliar várias de suas competências.
 A demanda
 

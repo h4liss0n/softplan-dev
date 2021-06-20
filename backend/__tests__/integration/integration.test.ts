@@ -74,7 +74,7 @@ describe("people", () => {
         }
       )
       .then(response => {
-        expect(response.statusCode).toBe(203);
+        expect(response.statusCode).toBe(201);
         done();
       });
   });

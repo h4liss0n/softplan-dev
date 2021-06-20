@@ -4,7 +4,7 @@ A demanda
 
 ### Deverá ser criada uma aplicação de cadastro de pessoas:Deverá ser criada uma aplicação de cadastro de pessoas:
 
-### Back-end [Back-end](https://github.com/h4liss0n/softplan-dev/blob/main/readme.backend.md "Back-end")
+### Back-end 
 - 	Nome - obrigatório
 - 	Sexo
 - 	E-mail - não obrigatório, deve ser validado caso preenchido
@@ -21,6 +21,11 @@ O acesso à aplicação só poderá ser realizado por um usuário pré-existente
 
 ### Instalação
 A aplicação deverá estar disponível em uma imagem docker a partir do docker-hub e não deve exigir configurações/parâmetros. Ou seja, ao rodar a imagem, deve levantar a aplicação e funcionar.
+
+[![install](install "install")](https://github.com/h4liss0n/softplan-dev/blob/main/readme/install.gif "install")
+
+
+https://github.com/h4liss0n/softplan-dev/blob/main/readme/install.gif
 
 ### Código fonte
 A aplicação deverá possuir um endpoint /source acessível sem autenticação via HTTP GET que deverá retornar o link do projeto no github com o código fonte do projeto desenvolvido.

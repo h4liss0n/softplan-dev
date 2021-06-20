@@ -34,7 +34,9 @@ A aplicação deverá possuir um endpoint /source acessível sem autenticação 
 -	Teste de integração da API em linguagem de sua preferência (Damos importância para pirâmide de testes) 👍
 -	A API desenvolvida em REST, seguindo o modelo de maturidade de Richardson ou utilizando GraphQL.😒
 -	A API deverá conter documentação executável que poderá ser utilizada durante seu desenvolvimento. (Utilizar swagger)👍
-![google auth2](https://github.com/h4liss0n/softplan-dev/blob/main/readme/sawgger.gif)
+![basic auth](https://github.com/h4liss0n/softplan-dev/blob/main/readme/sawgger1.gif)
+![jwt](https://github.com/h4liss0n/softplan-dev/blob/main/readme/sawgger2.gif)
+![filter](https://github.com/h4liss0n/softplan-dev/blob/main/readme/sawgger2.gif)
 -	Integração com OAuth 2 Google (https://developers.google.com/identity/protocols/OAuth2) 😒
 ![google auth2](https://github.com/h4liss0n/softplan-dev/blob/main/readme/google-auth2.gif)
 -	Implementar Chat entre as pessoas que estão na aplicação 👍
